@@ -21,34 +21,28 @@ let eventList = [];
 socketIO.on("connection", (socket) => {
 	console.log(`⚡: ${socket.id} user just connected!`);
 
-	// socket.on("newSchedule", (schedule) => {
-	// 	eventList.unshift(schedule);
-	// 	socket.emit("sendSchedules", eventList);
-	// });
+	socket.on("newSchedule", (schedule) => {
+		eventList.unshift(schedule);
+		socket.emit("sendSchedules", eventList);
+	});
 
-	socket.on("newEvent", (event) => {
-        eventList.unshift(event);
-        //sends the events back to the React app
-        socket.emit("sendSchedules", eventList);
-    });
-
-	// let interval = setInterval(function () {
-	// 	if (eventList.length > 0) {
-	// 		for (let i = 0; i < eventList.length; i++) {
-	// 			if (
-	// 				Number(eventList[i].hour) === new Date().getHours() &&
-	// 				Number(eventList[i].minute) === new Date().getMinutes() &&
-	// 				new Date().getSeconds() === 0
-	// 			) {
-	// 				socket.emit("notification", {
-	// 					title: eventList[i].title,
-	// 					hour: eventList[i].hour,
-	// 					mins: eventList[i].minute,
-	// 				});
-	// 			}
-	// 		}
-	// 	}
-	// }, 1000);
+	let interval = setInterval(function () {
+		if (eventList.length > 0) {
+			for (let i = 0; i < eventList.length; i++) {
+				if (
+					Number(eventList[i].hour) === new Date().getHours() &&
+					Number(eventList[i].minute) === new Date().getMinutes() &&
+					new Date().getSeconds() === 0
+				) {
+					socket.emit("notification", {
+						title: eventList[i].title,
+						hour: eventList[i].hour,
+						mins: eventList[i].minute,
+					});
+				}
+			}
+		}
+	}, 1000);
 
 	socket.on("disconnect", () => {
 		socket.disconnect();
