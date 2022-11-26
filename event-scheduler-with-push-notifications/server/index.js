@@ -10,7 +10,7 @@ const socketIO = require("socket.io")(http, {
 	},
 });
 
-const novu = new Novu("YOUR_API_KEY");
+const novu = new Novu("cdd15db90683fb27ac1ec6241ceb4f70");
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
