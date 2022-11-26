@@ -17,7 +17,7 @@ const messaging = getMessaging(firebaseApp);
 
 export const getTokenFromFirebase = () => {
 	return getToken(messaging, {
-		vapidKey: "YOUR_WEB_PUSH_CERT_VAPID_KEY",
+		vapidKey: "BIN9lks18zEjvgx3pls5MYguEfRefTxPLBFSEaAXkH5zPZMrtIinuWmXJ4lW2AuTba2RY6wxHDKjBYXexE_yhig",
 	})
 		.then((currentToken) => {
 			if (currentToken) {
