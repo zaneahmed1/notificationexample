@@ -57,7 +57,7 @@ app.get("/api", async (req, res) => {
 	});
 
 	await novu.subscribers.setCredentials(subscriberId, PushProviderIdEnum.FCM, {
-		deviceTokens: ["YOUR_DEVICE_TOKEN_FROM_REACT_APP"],
+		deviceTokens: ["BIN9lks18zEjvgx3pls5MYguEfRefTxPLBFSEaAXkH5zPZMrtIinuWmXJ4lW2AuTba2RY6wxHDKjBYXexE_yhig"],
 	});
 
 	const trigger = await novu.trigger("TEMPLATE_ID", {
