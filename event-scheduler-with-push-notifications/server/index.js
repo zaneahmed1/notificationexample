@@ -50,7 +50,7 @@ socketIO.on("connection", (socket) => {
 });
 
 app.get("/api", async (req, res) => {
-	const subscriberId = "YOUR_SUBSCRIBER_ID";
+	const subscriberId = "63827e7a15685362a3112dc9";
 	await novu.subscribers.identify(subscriberId, {
 		firstName: "YOUR_FIRST_NAME",
 		lastName: "YOUR_LAST_NAME",
