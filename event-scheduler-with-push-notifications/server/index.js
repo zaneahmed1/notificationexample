@@ -6,7 +6,7 @@ const PORT = 4000;
 const { Novu, PushProviderIdEnum } = require("@novu/node");
 const socketIO = require("socket.io")(http, {
 	cors: {
-		origin: "http://localhost:3000",
+		origin: "http://localhost:4000",
 	},
 });
 
@@ -24,6 +24,7 @@ socketIO.on("connection", (socket) => {
 	socket.on("newSchedule", (schedule) => {
 		eventList.unshift(schedule);
 		socket.emit("sendSchedules", eventList);
+		console.log(eventList);
 	});
 
 	let interval = setInterval(function () {
@@ -46,21 +47,22 @@ socketIO.on("connection", (socket) => {
 
 	socket.on("disconnect", () => {
 		socket.disconnect();
+		console.log("disconnect")
 	});
 });
 
 app.get("/api", async (req, res) => {
 	const subscriberId = "63827e7a15685362a3112dc9";
 	await novu.subscribers.identify(subscriberId, {
-		firstName: "YOUR_FIRST_NAME",
-		lastName: "YOUR_LAST_NAME",
+		firstName: "Zane",
+		lastName: "Ahmed",
 	});
 
 	await novu.subscribers.setCredentials(subscriberId, PushProviderIdEnum.FCM, {
 		deviceTokens: ["BIN9lks18zEjvgx3pls5MYguEfRefTxPLBFSEaAXkH5zPZMrtIinuWmXJ4lW2AuTba2RY6wxHDKjBYXexE_yhig"],
 	});
 
-	const trigger = await novu.trigger("TEMPLATE_ID", {
+	const trigger = await novu.trigger("on-boarding-notification", {
 		to: {
 			subscriberId,
 		},
